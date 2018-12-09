@@ -28,7 +28,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControll
     let memeTextAttributes:[NSAttributedString.Key:Any]=[
         NSAttributedString.Key(rawValue: NSAttributedString.Key.strokeColor.rawValue):UIColor.black,
         NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue):UIColor.white,
-        NSAttributedString.Key(rawValue: NSAttributedString.Key.strokeWidth.rawValue):2.5,
+        NSAttributedString.Key(rawValue: NSAttributedString.Key.strokeWidth.rawValue):-4.5,
         NSAttributedString.Key(rawValue: NSAttributedString.Key.font.rawValue):UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!
     ]
     override func viewDidLoad() {
