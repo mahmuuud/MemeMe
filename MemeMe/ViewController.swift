@@ -47,7 +47,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControll
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        subscribeToKeyboardNotifications()
+       // subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -57,6 +57,10 @@ class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControll
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.text=""
+        if textField==bottomOutline{
+            //to avoid shifting the view up when editing the topOutline as it hides it
+            subscribeToKeyboardNotifications()
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -149,6 +153,12 @@ class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControll
       
     }
     
+    @IBAction func cancel(_ sender: Any) {
+        imageView.image=nil
+        topOutline.text="TOP"
+        bottomOutline.text="BOTTOM"
+        actionBtn.isEnabled=false
+    }
     
     
     
