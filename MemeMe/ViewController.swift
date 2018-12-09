@@ -143,6 +143,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControll
         if let memedImage=generateMemeImage(){
             let activityVC=UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
               present(activityVC,animated: true,completion: nil)
+            //activity view controller is dismissed automatically
         }
         else{
             let alert=UIAlertController(title: "Error generating meme image", message: "please try again", preferredStyle: .alert)
