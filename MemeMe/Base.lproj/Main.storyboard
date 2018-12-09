@@ -22,7 +22,11 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="Edit Meme !" id="Gvp-I3-oa6">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="GZ5-u6-XlB"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="GZ5-u6-XlB">
+                                            <connections>
+                                                <action selector="share:" destination="BYZ-38-t0r" id="9Yp-Av-wBo"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="pCZ-9b-cDM"/>
                                     </navigationItem>
                                 </items>
@@ -58,7 +62,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UuJ-1P-eoQ">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UuJ-1P-eoQ">
                                         <rect key="frame" x="0.0" y="273.5" width="414" height="183"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SeF-Pc-lE1">
@@ -93,6 +97,8 @@
                         <outlet property="cameraBtn" destination="o2q-So-QxV" id="dSn-87-0Zr"/>
                         <outlet property="cancelBtn" destination="pCZ-9b-cDM" id="dTL-ti-bRF"/>
                         <outlet property="imageView" destination="UuJ-1P-eoQ" id="Q87-aW-lFL"/>
+                        <outlet property="navBar" destination="JC1-6D-QSS" id="4va-NF-R0X"/>
+                        <outlet property="toolBar" destination="lFG-QZ-0am" id="NxD-wd-gCp"/>
                         <outlet property="topOutline" destination="1eg-uh-tNe" id="8yU-w0-hao"/>
                     </connections>
                 </viewController>
