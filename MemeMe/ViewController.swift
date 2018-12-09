@@ -19,35 +19,24 @@ class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControll
     @IBOutlet weak var actionBtn: UIBarButtonItem!
     @IBOutlet weak var cancelBtn: UIBarButtonItem!
     @IBOutlet weak var toolBar: UIToolbar!
-    struct Meme{
-        let topText:String
-        let bottomText:String
-        let originalImage:UIImage
-        let memeImage:UIImage
-    }
+  
     let memeTextAttributes:[NSAttributedString.Key:Any]=[
         NSAttributedString.Key(rawValue: NSAttributedString.Key.strokeColor.rawValue):UIColor.black,
         NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue):UIColor.white,
-        NSAttributedString.Key(rawValue: NSAttributedString.Key.strokeWidth.rawValue):-4.5,
+        NSAttributedString.Key(rawValue: NSAttributedString.Key.strokeWidth.rawValue):-4.0,
         NSAttributedString.Key(rawValue: NSAttributedString.Key.font.rawValue):UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
-        topOutline.delegate=self
-        bottomOutline.delegate=self
-        topOutline.text="TOP"
-        bottomOutline.text="BOTTOM"
-        topOutline.defaultTextAttributes=memeTextAttributes
-        bottomOutline.defaultTextAttributes=memeTextAttributes
-        topOutline.textAlignment = .center
-        bottomOutline.textAlignment = .center
+        configureTextfield(textfield: topOutline, attributes: memeTextAttributes, withText: "TOP")
+        configureTextfield(textfield: bottomOutline, attributes: memeTextAttributes, withText: "BOTTOM")
         actionBtn.isEnabled = !(imageView.image==nil)
         cameraBtn.isEnabled=UIImagePickerController.isSourceTypeAvailable(.camera)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-       // subscribeToKeyboardNotifications()
+        subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -55,12 +44,15 @@ class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControll
         unsubscribeToKeyboardNotifications()
     }
     
+    func configureTextfield(textfield: UITextField, attributes: [NSAttributedString.Key: Any], withText: String) {
+        textfield.delegate = self
+        textfield.defaultTextAttributes = attributes
+        textfield.textAlignment = .center
+        textfield.text = withText
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.text=""
-        if textField==bottomOutline{
-            //to avoid shifting the view up when editing the topOutline as it hides it
-            subscribeToKeyboardNotifications()
-        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -106,7 +98,9 @@ class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControll
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     @objc func keyboardWillShow(_ notification:Notification){
-        view.frame.origin.y = -getKeyboardHeight(notification)
+        if bottomOutline.isFirstResponder{
+              view.frame.origin.y = -getKeyboardHeight(notification)
+        }
     }
     func getKeyboardHeight(_ notification:Notification)->CGFloat{
         let userInfo=notification.userInfo
@@ -134,25 +128,32 @@ class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControll
             return nil
         }
     }
-    //save function is not used yet
-//    func save(){
-//        let meme=Meme(topText: topOutline.text!, bottomText: bottomOutline.text!, originalImage: imageView.image!, memeImage: generateMemeImage()!)
-//    }
+
+    func save(){
+        let meme=Meme(topText: topOutline.text!, bottomText: bottomOutline.text!, originalImage: imageView.image!, memeImage: generateMemeImage()!)
+    }
 
     @IBAction func share(_ sender: Any) {
         if let memedImage=generateMemeImage(){
             let activityVC=UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
               present(activityVC,animated: true,completion: nil)
+            activityVC.completionWithItemsHandler={
+                (activity, completed, items, error) in
+                if (completed){
+                    self.save()
+            }
             //activity view controller is dismissed automatically
         }
-        else{
-            let alert=UIAlertController(title: "Error generating meme image", message: "please try again", preferredStyle: .alert)
-            let okAction=UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(okAction)
-            present(alert,animated: true,completion: nil)
         }
-      
     }
+//            do {
+//            let alert=UIAlertController(title: "Error generating meme image", message: "please try again", preferredStyle: .alert)
+//            let okAction=UIAlertAction(title: "OK", style: .default, handler: nil)
+//            alert.addAction(okAction)
+//            self.present(alert,animated: true,completion: nil)
+//        }
+      
+    
     
     @IBAction func cancel(_ sender: Any) {
         imageView.image=nil
@@ -162,6 +163,8 @@ class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControll
     }
     
     
-    
-}
 
+
+
+
+}
