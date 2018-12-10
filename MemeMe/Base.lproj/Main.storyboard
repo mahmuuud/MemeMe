@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Meme EditorVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="memeEditorVC" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,12 +24,12 @@
                                     <navigationItem title="Edit Meme !" id="Gvp-I3-oa6">
                                         <barButtonItem key="leftBarButtonItem" systemItem="action" id="GZ5-u6-XlB">
                                             <connections>
-                                                <action selector="share:" destination="BYZ-38-t0r" id="9Yp-Av-wBo"/>
+                                                <action selector="share:" destination="BYZ-38-t0r" id="nFL-T0-Bfn"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="pCZ-9b-cDM">
                                             <connections>
-                                                <action selector="cancel:" destination="BYZ-38-t0r" id="M1F-oM-ON4"/>
+                                                <action selector="cancel:" destination="BYZ-38-t0r" id="sfh-Xe-EwE"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -44,13 +44,13 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="p9e-aC-y3m"/>
                                     <barButtonItem systemItem="camera" id="o2q-So-QxV">
                                         <connections>
-                                            <action selector="pickImageCamera:" destination="BYZ-38-t0r" id="XTE-gu-dwA"/>
+                                            <action selector="pickImageCamera:" destination="BYZ-38-t0r" id="mNy-ar-Ruw"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="ljg-z8-RXw"/>
                                     <barButtonItem systemItem="add" id="I6w-p4-8Pb">
                                         <connections>
-                                            <action selector="pickImageAlbum:" destination="BYZ-38-t0r" id="gLX-cj-03b"/>
+                                            <action selector="pickImageAlbum:" destination="BYZ-38-t0r" id="SnF-LF-poY"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="CT1-GF-bcl"/>
@@ -97,15 +97,15 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="actionBtn" destination="GZ5-u6-XlB" id="ufb-Pv-2mj"/>
-                        <outlet property="albumBtn" destination="I6w-p4-8Pb" id="gbr-uz-fUP"/>
-                        <outlet property="bottomOutline" destination="jU8-wi-3ue" id="0fD-Ol-Dq0"/>
-                        <outlet property="cameraBtn" destination="o2q-So-QxV" id="dSn-87-0Zr"/>
-                        <outlet property="cancelBtn" destination="pCZ-9b-cDM" id="dTL-ti-bRF"/>
-                        <outlet property="imageView" destination="CWm-3A-Xe4" id="r9f-43-Z3u"/>
-                        <outlet property="navBar" destination="JC1-6D-QSS" id="4va-NF-R0X"/>
-                        <outlet property="toolBar" destination="lFG-QZ-0am" id="NxD-wd-gCp"/>
-                        <outlet property="topOutline" destination="saH-vx-Y9t" id="6Hl-Yl-oDG"/>
+                        <outlet property="actionBtn" destination="GZ5-u6-XlB" id="IaF-G1-h4J"/>
+                        <outlet property="albumBtn" destination="I6w-p4-8Pb" id="Bqq-EI-R1u"/>
+                        <outlet property="bottomOutline" destination="jU8-wi-3ue" id="fxE-0W-nS9"/>
+                        <outlet property="cameraBtn" destination="o2q-So-QxV" id="8L0-rN-0v5"/>
+                        <outlet property="cancelBtn" destination="pCZ-9b-cDM" id="igh-07-Xhn"/>
+                        <outlet property="imageView" destination="CWm-3A-Xe4" id="SUg-DD-HXF"/>
+                        <outlet property="navBar" destination="JC1-6D-QSS" id="FC5-ac-Wbq"/>
+                        <outlet property="toolBar" destination="lFG-QZ-0am" id="i4F-8t-XXa"/>
+                        <outlet property="topOutline" destination="saH-vx-Y9t" id="AZS-Au-bTW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

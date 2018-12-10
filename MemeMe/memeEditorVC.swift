@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  memeEditorVC.swift
 //  MemeMe
 //
 //  Created by mahmoud mohamed on 12/8/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class memeEditorVC: UIViewController,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var imageView: UIImageView!
@@ -35,12 +35,12 @@ class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControll
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
+        super.viewWillDisappear(animated)
         unsubscribeToKeyboardNotifications()
     }
     
@@ -61,15 +61,16 @@ class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControll
     }
     //MARK: Pick image functions
     @IBAction func pickImageAlbum(_ sender: Any) {
-        let imagePicker=UIImagePickerController()
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.delegate=self
-        present(imagePicker,animated: true,completion: nil)
+        pickImage(sourceType: UIImagePickerController.SourceType.photoLibrary)
     }
     
     @IBAction func pickImageCamera(_ sender: Any) {
+       pickImage(sourceType: UIImagePickerController.SourceType.camera)
+    }
+    
+    func pickImage(sourceType:UIImagePickerController.SourceType){
         let imagePicker=UIImagePickerController()
-        imagePicker.sourceType = .camera
+        imagePicker.sourceType = sourceType
         imagePicker.delegate=self
         present(imagePicker,animated: true,completion: nil)
     }
@@ -146,15 +147,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControll
         }
         }
     }
-//            do {
-//            let alert=UIAlertController(title: "Error generating meme image", message: "please try again", preferredStyle: .alert)
-//            let okAction=UIAlertAction(title: "OK", style: .default, handler: nil)
-//            alert.addAction(okAction)
-//            self.present(alert,animated: true,completion: nil)
-//        }
-      
-    
-    
+
     @IBAction func cancel(_ sender: Any) {
         imageView.image=nil
         topOutline.text="TOP"
@@ -162,9 +155,4 @@ class ViewController: UIViewController,UITextFieldDelegate,UIImagePickerControll
         actionBtn.isEnabled=false
     }
     
-    
-
-
-
-
 }
