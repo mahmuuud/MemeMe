@@ -19,6 +19,9 @@ class MemeEditorVC: UIViewController,UITextFieldDelegate,UIImagePickerController
     @IBOutlet weak var actionBtn: UIBarButtonItem!
     @IBOutlet weak var cancelBtn: UIBarButtonItem!
     @IBOutlet weak var toolBar: UIToolbar!
+    var topText="TOP"
+    var bottomText="BOTTOM"
+    var image:UIImage!
   
     let memeTextAttributes:[NSAttributedString.Key:Any]=[
         NSAttributedString.Key(rawValue: NSAttributedString.Key.strokeColor.rawValue):UIColor.black,
@@ -28,10 +31,11 @@ class MemeEditorVC: UIViewController,UITextFieldDelegate,UIImagePickerController
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTextfield(textfield: topOutline, attributes: memeTextAttributes, withText: "TOP")
-        configureTextfield(textfield: bottomOutline, attributes: memeTextAttributes, withText: "BOTTOM")
+        configureTextfield(textfield: topOutline, attributes: memeTextAttributes, withText: topText)
+        configureTextfield(textfield: bottomOutline, attributes: memeTextAttributes, withText: bottomText)
         actionBtn.isEnabled = !(imageView.image==nil)
         cameraBtn.isEnabled=UIImagePickerController.isSourceTypeAvailable(.camera)
+        imageView.image=image
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,6 +148,7 @@ class MemeEditorVC: UIViewController,UITextFieldDelegate,UIImagePickerController
             activityVC.completionWithItemsHandler={
                 (activity, completed, items, error) in
                 if (completed){
+                    print("saved")
                     self.save()
             }
             //activity view controller is dismissed automatically
@@ -152,10 +157,7 @@ class MemeEditorVC: UIViewController,UITextFieldDelegate,UIImagePickerController
     }
 
     @IBAction func cancel(_ sender: Any) {
-        imageView.image=nil
-        topOutline.text="TOP"
-        bottomOutline.text="BOTTOM"
-        actionBtn.isEnabled=false
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

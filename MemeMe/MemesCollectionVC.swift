@@ -38,4 +38,5 @@ class MemesCollectionVC:UICollectionViewController{
         self.navigationController!.pushViewController(memeEditVC, animated: true)
         
     }
+    
 }
