@@ -1,5 +1,5 @@
 //
-//  memeEditorVC.swift
+//  MemeEditorVC.swift
 //  MemeMe
 //
 //  Created by mahmoud mohamed on 12/8/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class memeEditorVC: UIViewController,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class MemeEditorVC: UIViewController,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var imageView: UIImageView!
@@ -132,6 +132,9 @@ class memeEditorVC: UIViewController,UITextFieldDelegate,UIImagePickerController
 
     func save(){
         let meme=Meme(topText: topOutline.text!, bottomText: bottomOutline.text!, originalImage: imageView.image!, memeImage: generateMemeImage()!)
+        let object=UIApplication.shared.delegate!
+        let delegate = object as! AppDelegate
+        delegate.memes.append(meme)
     }
 
     @IBAction func share(_ sender: Any) {
