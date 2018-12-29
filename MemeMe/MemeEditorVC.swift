@@ -148,7 +148,6 @@ class MemeEditorVC: UIViewController,UITextFieldDelegate,UIImagePickerController
             activityVC.completionWithItemsHandler={
                 (activity, completed, items, error) in
                 if (completed){
-                    print("saved")
                     self.save()
             }
             //activity view controller is dismissed automatically

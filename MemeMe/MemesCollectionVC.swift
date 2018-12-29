@@ -16,6 +16,11 @@ class MemesCollectionVC:UICollectionViewController{
         return delegate.memes
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.collectionView!.reloadData()
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return memes.count
     }
@@ -32,9 +37,9 @@ class MemesCollectionVC:UICollectionViewController{
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath:IndexPath){
         let memeEditVC=storyboard?.instantiateViewController(withIdentifier: "MemeEditor") as! MemeEditorVC
         let meme=memes[indexPath.row]
-        memeEditVC.topOutline.text=meme.topText
-        memeEditVC.bottomOutline.text=meme.bottomText
-        memeEditVC.imageView.image=meme.originalImage
+        memeEditVC.topText=meme.topText
+        memeEditVC.bottomText=meme.bottomText
+        memeEditVC.image=meme.originalImage
         self.navigationController!.pushViewController(memeEditVC, animated: true)
         
     }
