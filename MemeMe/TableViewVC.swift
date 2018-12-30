@@ -9,7 +9,7 @@
 import UIKit
 
 class TableViewVC: UITableViewController {
-    var memes:[Meme]{
+    var memes:[Meme]!{
         let object=UIApplication.shared.delegate
         let delegate=object as! AppDelegate
         return delegate.memes
@@ -27,19 +27,15 @@ class TableViewVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell=tableView.dequeueReusableCell(withIdentifier: "MemeTableCell")
         let meme=self.memes[indexPath.row]
-        cell?.textLabel?.text=meme.topText
-        cell?.detailTextLabel?.text=meme.bottomText
+        cell?.textLabel?.text=meme.topText+"..."+meme.bottomText
         cell?.imageView?.image=meme.originalImage
         return cell!
     }
    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let memeEditVC=storyboard?.instantiateViewController(withIdentifier: "MemeEditor") as! MemeEditorVC
-        let meme=memes[indexPath.row]
-        //manipulating the outlets properties directly always results in a wrapping crash.
-        memeEditVC.topText=meme.topText
-        memeEditVC.bottomText=meme.bottomText
-        memeEditVC.image=meme.originalImage
-        self.present(memeEditVC, animated: true, completion: nil)
+        let memeDetailsVC=self.storyboard?.instantiateViewController(withIdentifier: "memeDetails") as! MemeDetailsVC
+        memeDetailsVC.image=self.memes[indexPath.row].memeImage
+        self.navigationController!.pushViewController(memeDetailsVC, animated: true)
     }
+    
 }

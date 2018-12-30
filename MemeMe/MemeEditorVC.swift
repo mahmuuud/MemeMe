@@ -23,16 +23,10 @@ class MemeEditorVC: UIViewController,UITextFieldDelegate,UIImagePickerController
     var bottomText="BOTTOM"
     var image:UIImage!
   
-    let memeTextAttributes:[NSAttributedString.Key:Any]=[
-        NSAttributedString.Key(rawValue: NSAttributedString.Key.strokeColor.rawValue):UIColor.black,
-        NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue):UIColor.white,
-        NSAttributedString.Key(rawValue: NSAttributedString.Key.strokeWidth.rawValue):-4.0,
-        NSAttributedString.Key(rawValue: NSAttributedString.Key.font.rawValue):UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!
-    ]
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTextfield(textfield: topOutline, attributes: memeTextAttributes, withText: topText)
-        configureTextfield(textfield: bottomOutline, attributes: memeTextAttributes, withText: bottomText)
+        configureTextfield(textfield: topOutline, attributes: TextAttributes.memeTextAttributes, withText: topText)
+        configureTextfield(textfield: bottomOutline, attributes: TextAttributes.memeTextAttributes, withText: bottomText)
         actionBtn.isEnabled = !(imageView.image==nil)
         cameraBtn.isEnabled=UIImagePickerController.isSourceTypeAvailable(.camera)
         imageView.image=image

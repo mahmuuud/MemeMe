@@ -9,11 +9,21 @@
 import Foundation
 import UIKit
 
-class MemesCollectionVC:UICollectionViewController{
+class MemesCollectionVC:UICollectionViewController,UICollectionViewDelegateFlowLayout{
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     var memes:[Meme]!{
         let object = UIApplication.shared.delegate
         let delegate = object as! AppDelegate
         return delegate.memes
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let space:CGFloat=3.0
+        flowLayout.minimumInteritemSpacing=space
+        flowLayout.minimumLineSpacing=space
+        let dimension=(self.view.frame.width - (2 * space)) / 3.0
+        flowLayout.itemSize=CGSize(width: dimension, height: dimension)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,12 +45,9 @@ class MemesCollectionVC:UICollectionViewController{
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath:IndexPath){
-        let memeEditVC=storyboard?.instantiateViewController(withIdentifier: "MemeEditor") as! MemeEditorVC
-        let meme=memes[indexPath.row]
-        memeEditVC.topText=meme.topText
-        memeEditVC.bottomText=meme.bottomText
-        memeEditVC.image=meme.originalImage
-        self.navigationController!.pushViewController(memeEditVC, animated: true)
+        let memeDetailsVC=self.storyboard?.instantiateViewController(withIdentifier: "memeDetails") as! MemeDetailsVC
+        memeDetailsVC.image=self.memes[indexPath.row].memeImage
+        self.navigationController!.pushViewController(memeDetailsVC, animated: true)
         
     }
     
