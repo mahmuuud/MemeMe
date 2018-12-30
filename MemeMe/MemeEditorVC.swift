@@ -80,10 +80,9 @@ class MemeEditorVC: UIViewController,UITextFieldDelegate,UIImagePickerController
             
         }
         else{
-            let alert=UIAlertController(title: "ERROR loading Image", message: "Something wrong happened ,please try again", preferredStyle: .alert)
-            let okAction=UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(okAction)
-             present(alert,animated: true,completion: nil)
+            let title="ERROR loading Image"
+            let message="Something wrong happened ,please try again"
+            alert(title: title, message: message)
         }
         dismiss(animated: true, completion: nil)
     }
@@ -153,4 +152,10 @@ class MemeEditorVC: UIViewController,UITextFieldDelegate,UIImagePickerController
         self.dismiss(animated: true, completion: nil)
     }
     
+    func alert(title:String,message: String){
+        let alert=UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction=UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert,animated: true,completion: nil)
+    }
 }
